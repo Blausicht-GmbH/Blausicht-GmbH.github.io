@@ -97,9 +97,14 @@ h3 {
   color: rgba(255, 255, 255, .5);
 }
 
-footer {
-
+.navbar-toggler {
+  border: none;
+  outline: none;
 }
+
+  .navbar-toggler:focus {
+    box-shadow: none;
+  }
 
 
 .nav-link:focus,
