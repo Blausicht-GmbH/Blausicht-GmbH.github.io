@@ -1,10 +1,10 @@
-import { ViewportScroller, DOCUMENT } from '@angular/common';
-import { Component, Inject } from '@angular/core';
+import { ViewportScroller, DOCUMENT, NgClass } from '@angular/common';
+import { Component, HostListener, Inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, NgClass],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
@@ -14,12 +14,19 @@ export class HeaderComponent {
   //  this.viewportScroller.scrollToAnchor(sectionId);
   //}
 
+  isScrolled = false;
+
   scrollTo(targetId: string): void {
     const el = this.document.getElementById(targetId);
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
 
     }
+  }
 
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    this.isScrolled = scrollTop > 10;
   }
 }

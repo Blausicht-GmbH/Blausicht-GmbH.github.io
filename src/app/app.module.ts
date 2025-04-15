@@ -8,6 +8,7 @@ import { ImprintComponent } from './pages/imprint/imprint.component';
 import { PrivacyComponent } from './pages/privacy/privacy.component';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
 import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { HeaderComponent } from './components/header/header.component';
     IndexComponent,
     ImprintComponent,
     PrivacyComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
