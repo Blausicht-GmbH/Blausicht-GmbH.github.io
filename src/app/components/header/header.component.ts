@@ -1,6 +1,7 @@
 import { ViewportScroller, DOCUMENT, NgClass } from '@angular/common';
 import { Component, HostListener, Inject } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { ScrollService } from '../../services/scroll.service';
 
 @Component({
   selector: 'app-header',
@@ -9,19 +10,38 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  constructor(private viewportScroller: ViewportScroller, @Inject(DOCUMENT) private document: Document) { }
-  //scrollTo(sectionId: string): void {
-  //  this.viewportScroller.scrollToAnchor(sectionId);
-  //}
+  constructor(@Inject(DOCUMENT) private document: Document,
+    private router: Router,
+    private scrollService: ScrollService) { }
 
   isScrolled = false;
 
-  scrollTo(targetId: string): void {
-    const el = this.document.getElementById(targetId);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+  //scrollTo(targetId: string): void {
+  //  const el = this.document.getElementById(targetId);
+  //  if (el) {
+  //    el.scrollIntoView({ behavior: 'smooth' });
 
+  //  }
+  //}
+
+  scrollTo(targetId: string): void {
+    const currentUrl = this.router.url;
+
+    if (currentUrl === '/') {
+      this.smoothScroll(targetId);
+    } else {
+      this.scrollService.setTarget(targetId);
+      this.router.navigate(['/']);
     }
+  }
+
+  smoothScroll(targetId: string) {
+    setTimeout(() => {
+      const el = this.document.getElementById(targetId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100); // kleine Verzögerung, um sicherzustellen, dass DOM geladen ist
   }
 
   @HostListener('window:scroll', [])
