@@ -138,8 +138,9 @@ h3 {
 }
 
 
-footer .nav-link {
+footer .nav-link, .kontakt-section a {
   color: var(--secondary-color);
+  text-decoration: none;
 }
 
 
