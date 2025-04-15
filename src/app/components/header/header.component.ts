@@ -1,5 +1,5 @@
-import { ViewportScroller } from '@angular/common';
-import { Component } from '@angular/core';
+import { ViewportScroller, DOCUMENT } from '@angular/common';
+import { Component, Inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
@@ -9,5 +9,17 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+  constructor(private viewportScroller: ViewportScroller, @Inject(DOCUMENT) private document: Document) { }
+  //scrollTo(sectionId: string): void {
+  //  this.viewportScroller.scrollToAnchor(sectionId);
+  //}
 
+  scrollTo(targetId: string): void {
+    const el = this.document.getElementById(targetId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+
+    }
+
+  }
 }

@@ -1,4 +1,4 @@
-<header>
+<!--<header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top pt-3">
     <div class="container">
       <a class="navbar-brand" routerLink="/"><img src="/img/logo_bg_blue.png" style="width: 200px" /></a>
@@ -13,6 +13,7 @@
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item"><a class="nav-link" routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page" [routerLinkActiveOptions]="{exact: true}" data-bs-dismiss="offcanvas">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#skills" (click)="scrollTo('skills')" >Was wir können</a></li>
             <li class="nav-item"><a class="nav-link" routerLink="/imprint" routerLinkActive="active" ariaCurrentWhenActive="page" data-bs-dismiss="offcanvas">Impressum</a></li>
             <li class="nav-item"><a class="nav-link" routerLink="/privacy" routerLinkActive="active" ariaCurrentWhenActive="page" data-bs-dismiss="offcanvas">Datenschutz</a></li>
           </ul>
@@ -20,5 +21,24 @@
       </div>
     </div>
   </nav>
-</header>
+</header>-->
 
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top pt-3">
+    <div class="container">
+      <a class="navbar-brand" routerLink="/"><img src="/img/logo_bg_blue.png" style="width: 200px" /></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item"><a class="nav-link" routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page" [routerLinkActiveOptions]="{exact: true}" data-bs-dismiss="offcanvas">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills" (click)="scrollTo('skills')" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Was wir können</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about-us" (click)="scrollTo('about-us')" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Über uns</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/imprint" routerLinkActive="active" ariaCurrentWhenActive="page" data-bs-dismiss="offcanvas">Impressum</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/privacy" routerLinkActive="active" ariaCurrentWhenActive="page" data-bs-dismiss="offcanvas">Datenschutz</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
