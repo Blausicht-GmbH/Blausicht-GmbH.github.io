@@ -16,6 +16,18 @@ export class HeaderComponent {
 
   isScrolled = false;
 
+  scrollTo(targetId: string): void {
+    if (this.router.url !== '/') {
+      sessionStorage.setItem('scrollTarget', targetId);
+      this.router.navigateByUrl('/');
+    } else {
+      const el = this.document.getElementById(targetId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }
+
   //scrollTo(targetId: string): void {
   //  const el = this.document.getElementById(targetId);
   //  if (el) {
@@ -24,25 +36,27 @@ export class HeaderComponent {
   //  }
   //}
 
-  scrollTo(targetId: string): void {
-    const currentUrl = this.router.url;
+  //scrollTo(targetId: string): void {
+  //  const currentUrl = this.router.url;
 
-    if (currentUrl === '/') {
-      this.smoothScroll(targetId);
-    } else {
-      this.scrollService.setTarget(targetId);
-      this.router.navigate(['/']);
-    }
-  }
+  //  if (currentUrl === '/') {
+  //    this.smoothScroll(targetId);
+  //  } else {
+  //    console.log("scrollTo(targetId: string)");
+  //    console.log(targetId);
+  //    this.scrollService.setTarget(targetId);
+  //    this.router.navigate(['/']);
+  //  }
+  //}
 
-  smoothScroll(targetId: string) {
-    setTimeout(() => {
-      const el = this.document.getElementById(targetId);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 100); // kleine Verzögerung, um sicherzustellen, dass DOM geladen ist
-  }
+  //smoothScroll(targetId: string) {
+  //  setTimeout(() => {
+  //    const el = this.document.getElementById(targetId);
+  //    if (el) {
+  //      el.scrollIntoView({ behavior: 'smooth' });
+  //    }
+  //  }, 100); // kleine Verzögerung, um sicherzustellen, dass DOM geladen ist
+  //}
 
   @HostListener('window:scroll', [])
   onWindowScroll() {

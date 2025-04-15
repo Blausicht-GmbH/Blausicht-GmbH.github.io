@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { Component, AfterViewInit, Inject } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { ScrollService } from './services/scroll.service';
+import { filter } from 'rxjs/operators';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -8,20 +10,26 @@ import { ScrollService } from './services/scroll.service';
   standalone: false,
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   title = 'Blausicht GmbH';
 
-  constructor(private scrollService: ScrollService) { }
+  constructor(private router: Router, private scrollService: ScrollService, @Inject(DOCUMENT) private document: Document) { }
 
   ngAfterViewInit(): void {
-    const target = this.scrollService.consumeTarget();
-    if (target) {
-      setTimeout(() => {
-        const el = document.getElementById(target);
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      const targetId = sessionStorage.getItem('scrollTarget');
+      if (targetId) {
+        const el = this.document.getElementById(targetId);
         if (el) {
-          el.scrollIntoView({ behavior: 'smooth' });
+          // Timeout notwendig, damit die Sektion im DOM vorhanden ist
+          setTimeout(() => {
+            el.scrollIntoView({ behavior: 'smooth' });
+            sessionStorage.removeItem('scrollTarget');
+          }, 200);
         }
-      }, 100);
-    }
+      }
+    });
   }
 }
